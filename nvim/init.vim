@@ -21,6 +21,7 @@ Plug 'romgrk/barbar.nvim'               " Tab support for nvim
 Plug 'voldikss/vim-floaterm'            " Toggle terminal
 Plug 'neovim/nvim-lspconfig'            " LSP Support for different languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }   " Autocomplete
+Plug 'puremourning/vimspector'
 
 call plug#end()
 
@@ -28,7 +29,7 @@ call plug#end()
 nnoremap ` :NERDTreeFocus<CR>
 nnoremap <C-`> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 
 " Start NERDTree and leave the cursor in it.
 autocmd VimEnter * NERDTree | wincmd p
@@ -84,11 +85,34 @@ tnoremap   <silent>   <M-t>   <C-\><C-n>:FloatermToggle<CR>
 nnoremap   <silent>   <M-q>   :FloatermKill<CR>
 tnoremap   <silent>   <M-q>   <C-\><C-n>:FloatermKill<CR>
 
+" Copy-Paste easy
+vnoremap <C-c> :w !pbcopy<CR><CR> noremap <C-v> :r !pbpaste<CR><CR> 
+
 " Start neovim with two vertical panels
 " autocmd VimEnter * vsplit
 
 " Coc show documentation on hint
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" Vimspector keymaps
+func! AddToWatch()
+  let word = expand("<cexpr>")
+  call vimspector#AddWatch(word)
+endfunction
+
+nnoremap <leader>da :call vimspector#Launch()<CR>
+nnoremap <leader>dx :call vimspector#Reset()<CR>
+nnoremap <leader>dX :call vimspector#ClearBreakpoints()<CR>
+nnoremap <leader>d_ :call vimspector#Restart()<CR>
+nnoremap <leader>dn :call vimspector#Continue()<CR>
+nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
+nnoremap <leader>dh :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <S-x> :call vimspector#StepOut()<CR>
+nnoremap <S-i> :call vimspector#StepInto()<CR>
+nnoremap <S-o> :call vimspector#StepOver()<CR>
+nnoremap <leader>di :call AddToWatch()<CR>
+
+let g:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
 
 " external config files (in lua)
 luafile ~/.config/nvim/lsp.lua

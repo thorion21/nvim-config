@@ -1,0 +1,8 @@
+{
+    "coc.preferences.triggerSignatureHelp": true,
+    "clangd.fallbackFlags": [ "-std=c++17" ],
+	"clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build/Debug",
+        "--background-index"
+    ],
+}

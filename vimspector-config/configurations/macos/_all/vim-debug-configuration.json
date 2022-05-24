@@ -1,0 +1,23 @@
+{
+  "configurations": {
+    "MyApplication": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceRoot}/../build/Debug/Swizzle",
+        "args": [],
+        "cwd": "${workspaceRoot}/..",
+        "environment": [
+          { "name": "VIMRUNTIME", "value": "${workspaceRoot}" }
+        ],
+        "externalConsole": false,
+        "stopAtEntry": false,
+        "MIMode": "lldb",
+        "logging": {
+          "engineLogging": false
+        }
+      }
+    }
+  }
+}
